@@ -44,7 +44,9 @@ fileField.addEventListener('click', () => {
                 selectedFilesArray.forEach(file => {
                     fileNames.push(file.name)
                 });
-                fileField.textContent = fileNames.join(`,`);
+                const filesString = fileNames.join(`,`);
+                fileField.textContent = filesString;
+                console.log(filesString);
             } else
                 fileField.textContent = `Aucun fichier sélectionné.`; 
         });
