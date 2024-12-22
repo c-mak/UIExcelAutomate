@@ -4,6 +4,12 @@ const childrenAppender = (parentElemet,childElements) => {
     });
 }
 
+const setAttributes = (element, attributes) => {
+    Object.keys(attributes).forEach(key => {
+        element.setAttribute(key, attributes[key]);
+    });
+}
+
 const board = document.createElement(`div`);
 const title = document.createElement(`h1`);
 const text = document.createElement(`p`);
@@ -17,9 +23,12 @@ text.classList.add(`mainText`);
 fileField.classList.add(`fileField`);
 submitButton.setAttribute(`id`, `submitButton`);
 
-fileInput.setAttribute(`id`, `file-input`);
-fileInput.setAttribute(`type`, `file`);
-fileInput.setAttribute(`name`, `file-input`);
+setAttributes(fileInput, {
+    id: `file-input`,
+    type: `file`,
+    name: `file-input`,
+    multiple: true
+});
 
 
 title.textContent = `Uploading`;
@@ -32,7 +41,7 @@ childrenAppender(board, [title, text, fileField, submitButton]);
 document.body.appendChild(board);
 
 
-fileField.addEventListener('click', () => {
+fileField.addEventListener(`click`, () => {
     try{
         fileInput.click();
         fileInput.addEventListener(`change`, (event) => {
@@ -46,7 +55,8 @@ fileField.addEventListener('click', () => {
                 });
                 const filesString = fileNames.join(`,`);
                 fileField.textContent = filesString;
-                console.log(filesString);
+
+                console.log(`${filesString} files selected successfully`);
             } else
                 fileField.textContent = `Aucun fichier sélectionné.`; 
         });
@@ -54,3 +64,7 @@ fileField.addEventListener('click', () => {
         console.log(`Error on filField clicked : ${err}`);
     }
 });
+
+// submitButton.addEventListener(`click`, async() => {
+
+// });
