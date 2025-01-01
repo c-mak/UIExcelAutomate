@@ -53,10 +53,10 @@ fileField.addEventListener(`click`, () => {
                 selectedFilesArray.forEach(file => {
                     fileNames.push(file.name)
                 });
-                const filesString = fileNames.join(`,`);
+                const filesString = fileNames.join(`, `);
                 fileField.textContent = filesString;
 
-                console.log(`${filesString} files selected successfully`);
+                console.log(filesString);
             } else
                 fileField.textContent = `Aucun fichier sélectionné.`; 
         });
@@ -65,6 +65,31 @@ fileField.addEventListener(`click`, () => {
     }
 });
 
-// submitButton.addEventListener(`click`, async() => {
+submitButton.addEventListener(`click`, async () => {
+    try {
+        const files = fileInput.files;
+        if (files.length === 0) {
+            alert(`Veuillez sélectionner le fichier`);
+            return;
+        }
 
-// });
+        const formData = new FormData();
+        Array.from(files).forEach(file => formData.append(`files`, file));
+
+        const response = await axios.post(`http://127.0.0.1:20000/upload`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+
+        if (response.status === 200) {
+            const result = response.data;
+            const fileStringNames = result.files.join(`, `);
+            console.log(`File uploaded successfully: ${fileStringNames}`);
+            alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
+            fileField.textContent = `Parcourir...`;
+        } else
+            alert(`Erreur lors de l'envoi du fichie.`);
+    } catch (err) {
+        console.error(`Error on connection with server >> ${err.message}`);
+        alert(`Erreur lors de la connexion au serveur.`);
+    }
+});
