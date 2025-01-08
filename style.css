@@ -71,3 +71,17 @@ body {
     box-shadow: 0 0 2px 2px #0002;
     cursor: pointer; 
 }
+
+.downloadButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    background: #8c39c4;
+    border-radius: 5px;
+    color: #fff;
+    font: normal bold 16px/1.5 'poppins', sans-serif;
+    box-shadow: 0 0 2px 2px #0002;
+    cursor: pointer;
+}

@@ -14,6 +14,7 @@ const board = document.createElement(`div`);
 const title = document.createElement(`h1`);
 const text = document.createElement(`p`);
 const submitButton = document.createElement(`div`);
+const downloadButton = document.createElement(`div`);
 const fileInput = document.createElement(`input`);
 const fileField = document.createElement(`div`);
 
@@ -22,6 +23,7 @@ title.classList.add(`mainTitle`);
 text.classList.add(`mainText`);
 fileField.classList.add(`fileField`);
 submitButton.setAttribute(`id`, `submitButton`);
+downloadButton.classList.add(`downloadButton`);
 
 setAttributes(fileInput, {
     id: `file-input`,
@@ -34,6 +36,7 @@ setAttributes(fileInput, {
 title.textContent = `Uploading`;
 text.textContent = `Parcourez et sectionnez les fichiers source`;
 submitButton.textContent = `Upload file`;
+downloadButton.textContent = `Download file`;
 fileField.textContent = `Parcourir...`;
 
 
@@ -86,10 +89,17 @@ submitButton.addEventListener(`click`, async () => {
             console.log(`File uploaded successfully: ${fileStringNames}`);
             alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
             fileField.textContent = `Parcourir...`;
+            
+            board.removeChild(submitButton);
+            board.appendChild(downloadButton);
         } else
-            alert(`Erreur lors de l'envoi du fichie.`);
+        alert(`Erreur lors de l'envoi du fichie.`);
     } catch (err) {
         console.error(`Error on connection with server >> ${err.message}`);
         alert(`Erreur lors de la connexion au serveur.`);
     }
+});
+
+downloadButton.addEventListener(`click`, () => {
+    window.location.href = `http://127.0.0.1:20000/download`;
 });
