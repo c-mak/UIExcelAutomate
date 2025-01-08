@@ -15,6 +15,7 @@ const title = document.createElement(`h1`);
 const text = document.createElement(`p`);
 const submitButton = document.createElement(`div`);
 const downloadButton = document.createElement(`div`);
+const downloadButton2 = document.createElement(`div`);
 const fileInput = document.createElement(`input`);
 const fileField = document.createElement(`div`);
 
@@ -38,7 +39,6 @@ text.textContent = `Parcourez et sectionnez les fichiers source`;
 submitButton.textContent = `Upload file`;
 downloadButton.textContent = `Download file`;
 fileField.textContent = `Parcourir...`;
-
 
 childrenAppender(board, [title, text, fileField, submitButton]);
 document.body.appendChild(board);
@@ -89,7 +89,7 @@ submitButton.addEventListener(`click`, async () => {
             console.log(`File uploaded successfully: ${fileStringNames}`);
             alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
             fileField.textContent = `Parcourir...`;
-            
+        
             board.removeChild(submitButton);
             board.appendChild(downloadButton);
         } else
@@ -100,6 +100,11 @@ submitButton.addEventListener(`click`, async () => {
     }
 });
 
+downloadButton2.addEventListener(`click`, () => {
+    window.location.href = `http://127.0.0.1:20000/download/importFileD`;
+});
+
 downloadButton.addEventListener(`click`, () => {
-    window.location.href = `http://127.0.0.1:20000/download`;
+    window.location.href = `http://127.0.0.1:20000/download/importFileC`;
+    setTimeout(() => downloadButton2.click(), 3000);
 });
