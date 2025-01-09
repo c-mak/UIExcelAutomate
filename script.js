@@ -64,23 +64,31 @@ submitButton.addEventListener(`click`, async () => {
             return; 
         }
         
-        const fromData = new FormData();
+        const formData = new FormData();
         const filesArray = Array.from(files);
         filesArray.forEach(file => {
-            fromData.append(`files`, file);
+            formData.append(`files`, file);
         });
-        const response = await fetch(`http://127.0.0.1:20000`, {
+        const response = await fetch(`http://127.0.0.1:20000/upload`, {
             method: `POST`,
-            body: fromData
+            body: formData
         });
 
+        const result = await response.json();
+        const fileNames = result.files.join(', ');
+        const message = result.message;
+        const errorServer = result.error;
+
         if(response.ok) {
-            const result = await response.json();
-            console.log(`Fichier envoyé avec succès: ${result}`);
-        } else
-            alert(`Erreur lors de l'envoi du fichier`);
+            console.log(`${message}: ${fileNames}`);
+            alert(`${message}: ${fileNames}`);
+        } else {
+            console.log(`${message} >> ${errorServer}`);
+            alert(`${message} >> ${errorServer}`);
+        }
         
     } catch (err) {
-        console.error(`Erreur lors de la connexion au serveur >> ${err.message}`);
+        console.error(`Erreur lors de la connexion au serveur >> ${err}`);
+        alert(`Erreur lors de la connexion au serveur >> ${err}`);
     }
 });
