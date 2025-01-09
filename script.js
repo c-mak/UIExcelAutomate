@@ -1,4 +1,4 @@
-const childAppender = (parentElemet,childElements) => {
+const childrenAppender = (parentElemet,childElements) => {
     childElements.forEach(childElement => {
         parentElemet.appendChild(childElement);
     });
@@ -38,7 +38,7 @@ submitButton.textContent = `Upload file`;
 downloadButton.textContent = `Download file`;
 fileField.textContent = `Parcourir...`;
 
-childAppender(board, [title, text, fileField, submitButton]);
+childrenAppender(board, [title, text, fileField, submitButton]);
 document.body.appendChild(board);
 
 
