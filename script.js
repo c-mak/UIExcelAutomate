@@ -1,4 +1,4 @@
-const childrenAppender = (parentElemet,childElements) => {
+const childAppender = (parentElemet,childElements) => {
     childElements.forEach(childElement => {
         parentElemet.appendChild(childElement);
     });
@@ -26,19 +26,10 @@ fileField.classList.add(`fileField`);
 submitButton.setAttribute(`id`, `submitButton`);
 downloadButton.classList.add(`downloadButton`);
 
-<<<<<<< HEAD
 fileInput.setAttribute(`id`, `file-input`);
 fileInput.setAttribute(`type`, `file`);
 fileInput.setAttribute(`name`, `file-input`);
 fileInput.setAttribute(`multiple`, true);
-=======
-setAttributes(fileInput, {
-    id: `file-input`,
-    type: `file`,
-    name: `file-input`,
-    multiple: true
-});
->>>>>>> 48027506da09bf939862647e98cba3892626f2a4
 
 
 title.textContent = `Uploading`;
@@ -47,7 +38,7 @@ submitButton.textContent = `Upload file`;
 downloadButton.textContent = `Download file`;
 fileField.textContent = `Parcourir...`;
 
-childrenAppender(board, [title, text, fileField, submitButton]);
+childAppender(board, [title, text, fileField, submitButton]);
 document.body.appendChild(board);
 
 
