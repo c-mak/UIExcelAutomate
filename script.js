@@ -85,10 +85,11 @@ submitButton.addEventListener(`click`, async () => {
 
         if (response.status === 200) {
             const result = response.data;
-            const fileStringNames = result.files.join(`, `);
-            console.log(`File uploaded successfully: ${fileStringNames}`);
-            alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
+            // const fileStringNames = result.files.join(`, `);
+            // console.log(`File uploaded successfully: ${fileStringNames}`);
+            // alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
             fileField.textContent = `Parcourir...`;
+            alert(result.message);
         
             board.removeChild(submitButton);
             board.appendChild(downloadButton);
@@ -102,6 +103,8 @@ submitButton.addEventListener(`click`, async () => {
 
 downloadButton2.addEventListener(`click`, () => {
     window.location.href = `http://127.0.0.1:20000/download/importFileD`;
+    board.removeChild(downloadButton);
+    board.appendChild(submitButton);
 });
 
 downloadButton.addEventListener(`click`, () => {
