@@ -1,4 +1,4 @@
-const childrenAppender = (parentElemet, childElements) => {
+const childrenAppender = (parentElemet,childElements) => {
     childElements.forEach(childElement => {
         parentElemet.appendChild(childElement);
     });
