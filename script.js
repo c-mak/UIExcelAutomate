@@ -10,6 +10,10 @@ const setAttributes = (element, attributes) => {
     });
 }
 
+
+
+
+
 const board = document.createElement(`div`);
 const title = document.createElement(`h1`);
 const text = document.createElement(`p`);
@@ -62,12 +66,16 @@ fileField.addEventListener(`click`, () => {
                 console.log(filesString);
             } else
                 fileField.textContent = `Aucun fichier sélectionné.`; 
-        });
-    } catch(err) {
-        console.log(`Error on filField clicked : ${err}`);
-    }
-});
-
+            });
+        } catch(err) {
+            console.log(`Error on filField clicked : ${err}`);
+        }
+    });
+    
+const socket = new WebSocket(`ws://127.0.0.1:21000`);
+socket.onopen = () => socket.send(`sending message from client...`);
+socket.onclose = () => console.warn(`lost socket connection`);
+    
 submitButton.addEventListener(`click`, async () => {
     try {
         const files = fileInput.files;
@@ -89,9 +97,11 @@ submitButton.addEventListener(`click`, async () => {
             console.log(`File uploaded successfully: ${fileStringNames}`);
             alert(`Fichier envoyé avec succès: ${fileStringNames}.`);
             fileField.textContent = `Parcourir...`;
-        
-            board.removeChild(submitButton);
-            board.appendChild(downloadButton);
+            socket.onmessage = event => {
+                alert(event.data);
+                board.removeChild(submitButton);
+                board.appendChild(downloadButton);
+            }
         } else
         alert(`Erreur lors de l'envoi du fichie.`);
     } catch (err) {
