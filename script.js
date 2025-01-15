@@ -79,7 +79,7 @@ submitButton.addEventListener(`click`, async () => {
         const formData = new FormData();
         Array.from(files).forEach(file => formData.append(`files`, file));
 
-        const response = await axios.post(`https://6812-185-107-56-149.ngrok-free.app/upload`, formData, {
+        const response = await axios.post(`https://chamois-happy-usually.ngrok-free.app/upload`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
 
@@ -102,12 +102,12 @@ submitButton.addEventListener(`click`, async () => {
 });
 
 downloadButton2.addEventListener(`click`, () => {
-    window.location.href = `https://6812-185-107-56-149.ngrok-free.app/download/importFileD`;
+    window.location.href = `https://chamois-happy-usually.ngrok-free.app/download/importFileD`;
     board.removeChild(downloadButton);
     board.appendChild(submitButton);
 });
 
 downloadButton.addEventListener(`click`, () => {
-    window.location.href = `https://6812-185-107-56-149.ngrok-free.app/download/importFileC`;
+    window.location.href = `https://chamois-happy-usually.ngrok-free.app/download/importFileC`;
     setTimeout(() => downloadButton2.click(), 3000);
 });
